@@ -47,3 +47,69 @@ select ROUND(15.6789, 2)
 --10
 select ABS(-345.67)
 
+
+--11
+select SUBSTRING('ABCDEFGHI', 4, 3)
+
+--12
+select STUFF('Microsoft', 1, 3, 'XXX')
+
+--13
+select CHARINDEX(' ', 'SQL Server 2025')
+
+--14
+select CONCAT_WS(', ', 'FirsName', 'LastName')
+
+--15
+select CHARINDEX(' ', 'The database is very efficient', CHARINDEX(' ', 'The database is very efficient') + 1)
+select CHARINDEX(
+' ',
+'The database is very efficient',
+(CHARINDEX(' ', 'The database is very efficient', CHARINDEX(' ', 'The database is very efficient') + 1)+1)
+) - (select CHARINDEX(' ', 'The database is very efficient', CHARINDEX(' ', 'The database is very efficient') + 1)) - 1
+
+
+
+
+
+select SUBSTRING(
+'The database is very efficient',
+CHARINDEX(' ', 'The database is very efficient', CHARINDEX(' ', 'The database is very efficient') + 1),
+(select CHARINDEX(
+' ',
+'The database is very efficient',
+(CHARINDEX(' ', 'The database is very efficient', CHARINDEX(' ', 'The database is very efficient') + 1)+1)
+) - (select CHARINDEX(' ', 'The database is very efficient', CHARINDEX(' ', 'The database is very efficient') + 1)))
+)
+
+
+--16
+select SUBSTRING('INV1234', PATINDEX('%[0-9]%', 'INV1234'), LEN('INV1234'))
+
+--17
+SELECT ROUND(99.5, 0)
+
+--18
+select DATEDIFF(DAY, '2025-01-01', '2025-03-15')
+
+--19
+select DATENAME(month, '2025-06-10')
+
+--20
+select ceiling((DAY('2025-04-22')*1.0) / 7)
+
+
+
+
+--Advanced Level (10 Puzzles) 
+--21
+select CHARINDEX('@', 'user1@gmail.com')
+select right('user1@gmail.com',len('user1@gmail.com') - CHARINDEX('@', 'user1@gmail.com'))
+
+--22
+select len(('experienc'))-PATINDEX('%e%', REVERSE('experienc')) + 1
+
+--23
+SELECT FLOOR(RAND()*(500-100+1)+100)
+
+
