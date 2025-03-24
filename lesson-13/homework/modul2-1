@@ -1,0 +1,49 @@
+--Beginner Level (10 Puzzles)  
+
+--1
+select left('Database', 4)
+select SUBSTRING('Database', 1, 4)
+
+--2
+select CHARINDEX('sql', 'I love sql')
+
+--3
+select REPLACE('hello world', 'world', 'sql')
+
+--4
+select len('Microsoft SQL Server')		
+
+--5
+select RIGHT('Database', 3)
+
+--6
+select REPLACE('apple, banana, grape', 'a', '')
+select len('apple, banana, grape') - len(REPLACE('apple, banana, grape', 'a', ''))
+
+--7
+select right(('abcdefg'),len('abcdefg') - 5)
+
+--8
+WITH data AS (
+    SELECT 'SQL is powerful' AS text
+    UNION ALL
+    SELECT 'I love databases' AS text
+)
+SELECT 
+    CASE 
+        WHEN CHARINDEX(' ', text) > 0 THEN 
+            SUBSTRING(
+                text, 
+                CHARINDEX(' ', text) + 1, 
+                CHARINDEX(' ', text + ' ', CHARINDEX(' ', text) + 1) - CHARINDEX(' ', text) - 1
+            )
+        ELSE NULL
+    END AS second_word
+FROM data;
+
+--9
+select ROUND(15.6789, 2)
+
+--10
+select ABS(-345.67)
+
