@@ -113,3 +113,34 @@ select len(('experienc'))-PATINDEX('%e%', REVERSE('experienc')) + 1
 SELECT FLOOR(RAND()*(500-100+1)+100)
 
 
+
+--24
+SELECT CONVERT(VARCHAR, CAST(9876543 AS MONEY), 1);
+
+--25
+
+CREATE TABLE Customers (FullName VARCHAR(100));
+INSERT INTO Customers VALUES ('John Doe'), ('Jane Smith')
+
+select FullName,
+SUBSTRING(FullName, 1, CHARINDEX(' ', FullName) -1) as FirstName
+from Customers
+
+--26
+select REPLACE('SQL Server is great', ' ', '-')
+
+--27
+select FORMAT(42, '00000')
+
+--28
+
+
+--29
+--Remove first word from **'Error: Connection failed'**. Output: **: Connection failed'** 
+
+select right('Error: Connection failed' ,LEN('Error: Connection failed') - CHARINDEX(' ', 'Error: Connection failed'))
+
+--30
+select DATEDIFF(MINUTE, '08:15:00', '09:45:00')
+
+
