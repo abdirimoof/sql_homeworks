@@ -147,6 +147,55 @@ on dt3.EmployeeID = dt4.EmployeeID
 
 
 
+--19Find employees whose total sales exceed their own salary. (Derived Table)
+
+select * from Employees join
+(select EmployeeID, sum(SalesAmount) totalSales from sales
+group by EmployeeID)as dt
+on Employees.EmployeeID = dt.EmployeeID and totalSales > Salary
+
+--20.Find the department with the most sales transactions. (Derived Table)
+
+ 
+
+select top 1 * from (select DepartmentID, sum(SalesAmount) Total from Sales join Employees
+on sales.EmployeeID = Employees.EmployeeID
+group by DepartmentID) as dt
+order by Total desc
+
+
+--21Find the top-selling employee for each product. (Derived Table)
+select * from Employees
+select * from Sales
+order by ProductID, EmployeeID
+
+WITH TopSales AS (
+    SELECT 
+        ProductID, 
+        EmployeeID, 
+        MAX(SalesAmount) AS MaxSalesAmount
+    FROM Sales
+    GROUP BY ProductID, EmployeeID
+)
+SELECT 
+    S.ProductID,
+    S.EmployeeID,
+    S.SalesAmount,
+    S.SaleDate
+FROM Sales S
+INNER JOIN TopSales TS
+ON S.ProductID = TS.ProductID 
+AND S.SalesAmount = TS.MaxSalesAmount
+ORDER BY S.ProductID;
+
+
+
+
+
+
+
+
+
 
 
 
